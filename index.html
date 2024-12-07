@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to My GitHub Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,6 +53,28 @@
         .experience li {
             margin-bottom: 10px;
         }
+
+        /* Markdown 内容的样式 */
+        .markdown-content {
+            text-align: left;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .markdown-content code {
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .markdown-content pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
     </style>
 </head>
 
@@ -62,10 +85,29 @@
         <div class="experience">
             <h2>Personal Experience</h2>
             <ul>
-                <li><strong>Reasearch Intern in Tencent</strong>2024.1 ~ now </li>
+                <li><strong>Reasearch Intern in Tencent</strong>from 2024.1 to now </li>
             </ul>
         </div>
+
+        <div class="markdown-content" id="markdown-content">
+            <!-- Markdown 内容将在这里显示 -->
+        </div>
     </div>
+
+    <script>
+        // 加载 Markdown 文件
+        fetch('content.md')
+            .then(response => response.text())
+            .then(markdownContent => {
+                document.getElementById('markdown-content').innerHTML =
+                    marked.parse(markdownContent);
+            })
+            .catch(error => {
+                console.error('Error loading markdown:', error);
+                document.getElementById('markdown-content').innerHTML =
+                    'Error loading content.';
+            });
+    </script>
 </body>
 
 </html>
